@@ -65,13 +65,15 @@ char *load_file_in_mem(void)
     return content;
 }
 
-char find_same_item(char const *line)
+char find_same_item(char const *line1, char const *line2, char const *line3)
 {
-    int len = strlen(line);
-    for (int j = 0; j < len / 2; j++) {
-        for (int k = len / 2; line[k] != '\0'; k++) {
-            if (line[j] == line[k]) {
-                return line[j];
+    for (int i = 0; line1[i] != '\0'; i++) {
+        for (int j = 0; line2[j] != '\0'; j++) {
+            if (line1[i] == line2[j]) {
+                for (int k = 0; line3[k] != '\0'; k++) {
+                    if (line2[j] == line3[k])
+                        return line3[k];
+                }
             }
         }
     }
@@ -81,8 +83,8 @@ int main(void)
 {
     int result = 0;
     char **filecontent = load_2d_arr_from_file(load_file_in_mem());
-    for (int i = 0; filecontent[i] != NULL; i++) {
-        char priority = find_same_item(filecontent[i]);
+    for (int i = 0; filecontent[i] != NULL; i += 3) {
+        char priority = find_same_item(filecontent[i], filecontent[i + 1], filecontent[i + 2]);
         if (priority >= 'A' && priority <= 'Z') {
             result += priority - 'A' + 27;
         }
