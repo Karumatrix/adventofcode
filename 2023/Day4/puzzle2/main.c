@@ -65,11 +65,63 @@ char *load_file_in_mem(void)
     return content;
 }
 
+int get_num(char *line, int i)
+{
+    int result = line[i + 1] - '0';
+    if (line[i] != ' ') {
+        result += (line[i] - '0') * 10;
+    }
+    return result;
+}
+
+int count_winning_num(char **filecontent, int i)
+{
+    int result = 0;
+    int i_win_num = 0;
+    int i_my_num = 0;
+    while (filecontent[i][i_win_num] != '\0') {
+        if (filecontent[i][i_win_num] == ':') {
+            i_win_num += 2;
+            break;
+        }
+        i_win_num++;
+    }
+    while (filecontent[i][i_my_num] != '\0') {
+        if (filecontent[i][i_my_num] == '|') {
+            i_my_num += 2;
+            break;
+        }
+        i_my_num++;
+    }
+    for (int j = i_win_num; filecontent[i][j] != '|'; j += 3) {
+        int num1 = get_num(filecontent[i], j);
+        int len = strlen(filecontent[i]);
+        for (int k = i_my_num; k < len; k += 3) {
+            int num2 = get_num(filecontent[i], k);
+            if (num1 == num2) {
+                result += 1;
+            }
+        }
+    }
+    return result;
+}
+
+int recursive(char **filecontent, int i)
+{
+    int num_win = count_winning_num(filecontent, i);
+    int result = num_win;
+    for (int j = 1; j <= num_win; j++) {
+        result += recursive(filecontent, i + j);
+    }
+    return result;
+}
+
 int main(void)
 {
     int result = 0;
     char **filecontent = load_2d_arr_from_file(load_file_in_mem());
     for (int i = 0; filecontent[i] != NULL; i++) {
+        result += recursive(filecontent, i) + 1;
     }
     printf("%d\n", result);
     for (int i = 0; filecontent[i] != NULL; i++)
