@@ -65,11 +65,77 @@ char *load_file_in_mem(void)
     return content;
 }
 
+int find_substring(char *s_string, char *r_string, int r_index)
+{
+    for (int j = 0; s_string[j] != '\0'; j++) {
+        if (r_string[j + r_index] == '\0')
+            return 0;
+        if (s_string[j] != r_string[j + r_index])
+            return 0;
+    }
+    return 1;
+}
+
 int main(void)
 {
     int result = 0;
+    int max_red = 12;
+    int max_green = 13;
+    int max_blue = 14;
     char **filecontent = load_2d_arr_from_file(load_file_in_mem());
     for (int i = 0; filecontent[i] != NULL; i++) {
+        int power = 1;
+        result += i + 1;
+        for (int j = 0; filecontent[i][j] != '\0'; j++) {
+            if (find_substring("red\0", filecontent[i], j) == 1) {
+                int temp = j - 2;
+                int num = 0;
+                while (temp >= 0) {
+                    if (filecontent[i][temp] == ' ')
+                        break;
+                    num += (filecontent[i][temp] - '0') * power;
+                    power *= 10;
+                    temp--;
+                }
+                if (num > max_red) {
+                    result -= i + 1;
+                    break;
+                }
+                power = 1;
+            }
+            if (find_substring("green\0", filecontent[i], j) == 1) {
+                int temp = j - 2;
+                int num = 0;
+                while (temp >= 0) {
+                    if (filecontent[i][temp] == ' ')
+                        break;
+                    num += (filecontent[i][temp] - '0') * power;
+                    power *= 10;
+                    temp--;
+                }
+                if (num > max_green) {
+                    result -= i + 1;
+                    break;
+                }
+                power = 1;
+            }
+            if (find_substring("blue\0", filecontent[i], j) == 1) {
+                int temp = j - 2;
+                int num = 0;
+                while (temp >= 0) {
+                    if (filecontent[i][temp] == ' ')
+                        break;
+                    num += (filecontent[i][temp] - '0') * power;
+                    power *= 10;
+                    temp--;
+                }
+                if (num > max_blue) {
+                    result -= i + 1;
+                    break;
+                }
+                power = 1;
+            }
+        }
     }
     printf("%d\n", result);
     for (int i = 0; filecontent[i] != NULL; i++)

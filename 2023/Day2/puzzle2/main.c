@@ -65,11 +65,74 @@ char *load_file_in_mem(void)
     return content;
 }
 
+int find_substring(char *s_string, char *r_string, int r_index)
+{
+    for (int j = 0; s_string[j] != '\0'; j++) {
+        if (r_string[j + r_index] == '\0')
+            return 0;
+        if (s_string[j] != r_string[j + r_index])
+            return 0;
+    }
+    return 1;
+}
+
 int main(void)
 {
     int result = 0;
     char **filecontent = load_2d_arr_from_file(load_file_in_mem());
     for (int i = 0; filecontent[i] != NULL; i++) {
+        int min_red = 0;
+        int min_green = 0;
+        int min_blue = 0;
+        int power = 1;
+        for (int j = 0; filecontent[i][j] != '\0'; j++) {
+            if (find_substring("red\0", filecontent[i], j) == 1) {
+                int temp = j - 2;
+                int num = 0;
+                while (temp >= 0) {
+                    if (filecontent[i][temp] == ' ')
+                        break;
+                    num += (filecontent[i][temp] - '0') * power;
+                    power *= 10;
+                    temp--;
+                }
+                if (num > min_red) {
+                    min_red = num;
+                }
+                power = 1;
+            }
+            if (find_substring("green\0", filecontent[i], j) == 1) {
+                int temp = j - 2;
+                int num = 0;
+                while (temp >= 0) {
+                    if (filecontent[i][temp] == ' ')
+                        break;
+                    num += (filecontent[i][temp] - '0') * power;
+                    power *= 10;
+                    temp--;
+                }
+                if (num > min_green) {
+                    min_green = num;
+                }
+                power = 1;
+            }
+            if (find_substring("blue\0", filecontent[i], j) == 1) {
+                int temp = j - 2;
+                int num = 0;
+                while (temp >= 0) {
+                    if (filecontent[i][temp] == ' ')
+                        break;
+                    num += (filecontent[i][temp] - '0') * power;
+                    power *= 10;
+                    temp--;
+                }
+                if (num > min_blue) {
+                    min_blue = num;
+                }
+                power = 1;
+            }
+        }
+        result += min_blue * min_green * min_red;
     }
     printf("%d\n", result);
     for (int i = 0; filecontent[i] != NULL; i++)
