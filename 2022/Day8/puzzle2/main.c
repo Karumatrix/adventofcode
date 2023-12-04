@@ -65,11 +65,59 @@ char *load_file_in_mem(void)
     return content;
 }
 
+int is_tree_visible(char **filecontent, int i, int j)
+{
+    char tree = filecontent[i][j];
+    int tree_visible = 1;
+    for (int j1 = j - 1; j1 >= 0; j1--) {
+        if (filecontent[i][j1] >= tree) {
+            tree_visible *= j - j1;
+            break;
+        }
+        if (j1 - 1 == -1) {
+            tree_visible *= j - j1;
+        }
+    }
+    for (int j1 = j + 1; filecontent[i][j1] != '\0'; j1++) {
+        if (filecontent[i][j1] >= tree) {
+            tree_visible *= j1 - j;
+            break;
+        }
+        if (filecontent[i][j1 + 1] == '\0') {
+            tree_visible *= j1 - j;
+        }
+    }
+    for (int i1 = i - 1; i1 >= 0; i1--) {
+        if (filecontent[i1][j] >= tree) {
+            tree_visible *= i - i1;
+            break;
+        }
+        if (i1 - 1 == -1) {
+            tree_visible *= i - i1;
+        }
+    }
+    for (int i1 = i + 1; filecontent[i1] != NULL; i1++) {
+        if (filecontent[i1][j] >= tree) {
+            tree_visible *= i1 - i;
+            break;
+        }
+        if (filecontent[i1 + 1] == NULL) {
+            tree_visible *= i1 - i;
+        }
+    }
+    return tree_visible;
+}
+
 int main(void)
 {
-    int result = 0;
     char **filecontent = load_2d_arr_from_file(load_file_in_mem());
-    for (int i = 0; filecontent[i] != NULL; i++) {
+    int result = 0;
+    for (int i = 1; filecontent[i + 1] != NULL; i++) {
+        for (int j = 1; filecontent[i][j + 1] != '\0'; j++) {
+            int temp = is_tree_visible(filecontent, i, j);
+            if (temp > result)
+                result = temp;
+        }
     }
     printf("%d\n", result);
     for (int i = 0; filecontent[i] != NULL; i++)
