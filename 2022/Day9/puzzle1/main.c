@@ -65,12 +65,44 @@ char *load_file_in_mem(void)
     return content;
 }
 
+int get_num(char *line, int i)
+{
+    int result = 0;
+    if (line[i + 1] == '\0') {
+        result += line[i] - '0';
+    } else {
+        result += (line[i] - '0') * 10;
+        result += line[i + 1] - '0';
+    }
+    return result;
+}
+
+
 int main(void)
 {
     int result = 0;
+    int x1 = 0;
+    int x2 = 0;
+    int y1 = 0;
+    int y2 = 0;
     char **filecontent = load_2d_arr_from_file(load_file_in_mem());
     for (int i = 0; filecontent[i] != NULL; i++) {
+        switch (filecontent[i][0]) {
+            case 'R':
+                x1 += get_num(filecontent[i], 2);
+                break;
+            case 'L':
+                x1 -= get_num(filecontent[i], 2);
+                break;
+            case 'U':
+                y1 -= get_num(filecontent[i], 2);
+                break;
+            case 'D':
+                y1 += get_num(filecontent[i], 2);
+                break;
+        }
     }
+    printf("%d  %d   |  %d  %d\n", x1, x2, y1, y2);
     printf("%d\n", result);
     for (int i = 0; filecontent[i] != NULL; i++)
         free(filecontent[i]);
