@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"sort"
 	"strings"
 )
 
@@ -31,25 +30,29 @@ func stringToLines(content string) []string {
 }
 
 func part1() int {
-	lists := stringToLines(readFileContent("./input.txt"))
-	leftList := []int{}
-	rightList := []int{}
-	sumSmallestDistances := 0
+	instructions := stringToLines(readFileContent("./input.txt"))
+	cycles := 0
+	X := 1
+	signalStrengthSum := 0
+	checkCycles := map[int]bool{20: true, 60: true, 100:true, 140: true, 180: true, 220: true}
 
-	for _, numbers := range lists {
+	for _, instruction := range instructions {
+		parts := strings.Fields(instruction)
 		value := 0
-		parts := strings.Split(numbers, "   ")
-		fmt.Sscanf(parts[0], "%d", &value)
-		leftList = append(leftList, value)
-		fmt.Sscanf(parts[1], "%d", &value)
-		rightList = append(rightList, value)
+		if parts[0] == "addx" {
+			fmt.Sscanf(parts[1], "%d", &value)
+			cycles++
+			if checkCycles[cycles] {
+				signalStrengthSum += cycles * X
+			}
+		}
+		cycles++
+		if checkCycles[cycles] {
+			signalStrengthSum += cycles * X
+		}
+		X += value
 	}
-	sort.Ints(leftList)
-	sort.Ints(rightList)
-	for i := 0; i < len(leftList); i++ {
-		sumSmallestDistances += max(leftList[i], rightList[i]) - min(leftList[i], rightList[i])
-	}
-	return sumSmallestDistances
+	return signalStrengthSum
 }
 
 func main() {
