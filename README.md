@@ -8,7 +8,7 @@ Welcome to my **Advent of Code** journey! 🎄 Below is my progress for the year
 
 |          Day           |  Status  |          Notes          |
 |------------------------|----------|-------------------------|
-| [Day 1](./2024/Day01)  | ❌       | Pending...              |
+| [Day 1](./2024/Day01)  | ✅       | Pending...              |
 | [Day 2](./2024/Day02)  | ❌       | Pending...              |
 | [Day 3](./2024/Day03)  | ❌       | Pending...              |
 | [Day 4](./2024/Day04)  | ❌       | Pending...              |
@@ -81,7 +81,7 @@ Welcome to my **Advent of Code** journey! 🎄 Below is my progress for the year
 | [Day 7](./2022/Day07)  | ✅       | Completed successfully! |
 | [Day 8](./2022/Day08)  | ✅       | Completed successfully! |
 | [Day 9](./2022/Day09)  | ✅       | Completed successfully! |
-| [Day 10](./2022/Day10) | ❌       | Pending...              |
+| [Day 10](./2022/Day10) | ✅       | Pending...              |
 | [Day 11](./2022/Day11) | ❌       | Pending...              |
 | [Day 12](./2022/Day12) | ❌       | Pending...              |
 | [Day 13](./2022/Day13) | ❌       | Pending...              |
