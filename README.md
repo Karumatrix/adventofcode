@@ -1,6 +1,6 @@
 # Advent of Code Progress
 
-Welcome to my **Advent of Code** journey! 🎄 Below is my progress for the years 2022 and 2023. Each day completed is marked with a ✅ (linked to its solution folder), and days yet to be done are marked with ❌.
+Welcome to my **Advent of Code** journey! 🎄 Below is my progress for the years 2022, 2023 and 2024. Each day completed is marked with a ✅ (linked to its solution folder), and days yet to be done are marked with ❌.
 
 ---
 
