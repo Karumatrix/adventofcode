@@ -3,13 +3,13 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"log"
 	"strings"
 )
 
 func readFileContent(filepath string) string {
-    content, err := ioutil.ReadFile(filepath)
+    content, err := os.ReadFile(filepath)
     if err != nil {
         log.Fatal(err)
     }
