@@ -64,7 +64,7 @@ func removeElement(slice []int, i int) []int {
 	return append(append([]int{}, slice[:i]...), slice[i+1:]...)
 }
 
-func part1() int {
+func part2() int {
 	reports := stringToLines(readFileContent("./input.txt"))
 	result := 0
 
@@ -96,5 +96,5 @@ func part1() int {
 }
 
 func main() {
-	fmt.Println(part1())
+	fmt.Println(part2())
 }
