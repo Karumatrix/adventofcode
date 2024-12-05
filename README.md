@@ -99,6 +99,3 @@ Welcome to my **Advent of Code** journey! 🎄 Below is my progress for the year
 | [Day 25](./2022/Day25) | ❌       | Pending...              |
 
 ---
-
-**Happy Coding! 🎅**
-
