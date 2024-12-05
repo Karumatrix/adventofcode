@@ -97,5 +97,3 @@ Welcome to my **Advent of Code** journey! 🎄 Below is my progress for the year
 | [Day 23](./2022/Day23) | ❌       | Pending...              |
 | [Day 24](./2022/Day24) | ❌       | Pending...              |
 | [Day 25](./2022/Day25) | ❌       | Pending...              |
-
----
