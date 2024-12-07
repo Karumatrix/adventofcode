@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func filepathToString(filepath string) string {
@@ -32,8 +33,39 @@ func filepathToStringArray(filepath string) []string {
 	return lines
 }
 
+func checkOperations(values []int, resultWanted, currValue, index int) bool {
+	if index == len(values) {
+		return currValue == resultWanted
+	}
+	if checkOperation(values, resultWanted, currValue + values[index], index + 1) {
+		return true
+	}
+	if checkOperation(values, resultWanted, currValue * values[index], index + 1) {
+		return true
+	}
+	return false
+}
+
 func aoc(filepath string) {
-	fmt.Println("Hello world")
+	file := filepathToStringArray(filepath)
+	result := 0
+
+	for _, line := range file {
+		parts := strings.Split(line, ":")
+		resultWanted := 0
+		tmpValue := 0
+		fmt.Sscanf(parts[0], "%d", &resultWanted)
+		var values []int
+		subParts := strings.Split(parts[1], " ")
+		for _, part := range subParts {
+			fmt.Sscanf(part, "%d", &tmpValue)
+			values = append(values, tmpValue)
+		}
+		if checkOperations(values, resultWanted, values[0], 1) {
+			result += resultWanted
+		}
+	}
+	fmt.Println(result)
 }
 
 func main() {
