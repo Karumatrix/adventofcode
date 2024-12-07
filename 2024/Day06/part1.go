@@ -52,7 +52,7 @@ func updateGuardPos(file []string, offsetX, offsetY int, guardPos Position) (Pos
 	row := []rune(file[guardPos.X])
 	row[guardPos.Y] = 'X'
 	file[guardPos.X] = string(row)
-	if guardPos.X < 0 || guardPos.X >= len(file) || guardPos.Y < 0 || guardPos.Y >= len(file[0]) || guardPos.X + offsetX < 0 || guardPos.X +offsetX >= len(file[0]) || guardPos.Y + offsetY < 0 || guardPos.Y + offsetY >= len(file[0]){
+	if guardPos.X + offsetX < 0 || guardPos.X + offsetX >= len(file[0]) || guardPos.Y + offsetY < 0 || guardPos.Y + offsetY >= len(file[0]){
 		return Position{-1, -1}, file
 	}
 	if file[guardPos.X + offsetX][guardPos.Y + offsetY] == '#' {

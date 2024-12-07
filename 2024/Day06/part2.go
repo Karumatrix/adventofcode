@@ -48,14 +48,11 @@ func getGuardPos(file []string) Position {
 }
 
 func updateGuardPos(file []string, offsetX, offsetY int, guardPos Position) (Position, []string) {
-	direction := file[guardPos.X][guardPos.Y]
-	row := []rune(file[guardPos.X])
-	row[guardPos.Y] = 'X'
-	file[guardPos.X] = string(row)
-	if guardPos.X < 0 || guardPos.X >= len(file) || guardPos.Y < 0 || guardPos.Y >= len(file[0]) || guardPos.X + offsetX < 0 || guardPos.X +offsetX >= len(file[0]) || guardPos.Y + offsetY < 0 || guardPos.Y + offsetY >= len(file[0]){
+	if guardPos.X + offsetX < 0 || guardPos.X +offsetX >= len(file[0]) || guardPos.Y + offsetY < 0 || guardPos.Y + offsetY >= len(file[0]){
 		return Position{-1, -1}, file
 	}
-	if file[guardPos.X + offsetX][guardPos.Y + offsetY] == '#' || file[guardPos.X + offsetX][guardPos.Y + offsetY] == 'O' {
+	direction := file[guardPos.X][guardPos.Y]
+	if file[guardPos.X + offsetX][guardPos.Y + offsetY] == '#' {
 		switch direction {
 		case '^':
 			direction = '>'
@@ -70,7 +67,7 @@ func updateGuardPos(file []string, offsetX, offsetY int, guardPos Position) (Pos
 		guardPos.X += offsetX
 		guardPos.Y += offsetY
 	}
-	row = []rune(file[guardPos.X])
+	row := []rune(file[guardPos.X])
 	row[guardPos.Y] = rune(direction)
 	file[guardPos.X] = string(row)
 	return guardPos, file
@@ -118,11 +115,11 @@ func aoc(filepath string) {
 	result := 0
 
 	for indexX, line := range file {
+		fmt.Println("Testing line:", indexX, "/", len(file) - 1)
 		for indexY, _ := range line {
 			if file[indexX][indexY] == '.' {
-				fmt.Println("Testing:", indexX, indexY)
 				row := []rune(file[indexX])
-				row[indexY] = 'O'
+				row[indexY] = '#'
 				file[indexX] = string(row)
 				if testMap(originalGuardPos, file) {
 					result++
