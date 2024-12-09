@@ -32,8 +32,66 @@ func filepathToStringArray(filepath string) []string {
 	return lines
 }
 
+func checkNewDisk(newDisk string) bool {
+	isFree := false
+	for _, letter := range newDisk {
+		if letter == '.' {
+			isFree = true
+		}
+		if !isFree && letter == '.' {
+			return false
+		}
+		if isFree && letter != '.' {
+			return false
+		}
+	}
+	return true
+}
+
 func aoc(filepath string) {
-	fmt.Println("Hello world")
+	file := filepathToString(filepath)
+	result := 0
+	isFree := false
+	var disk []int
+	ID := 0
+
+	for _, letter := range file {
+		if letter == '\n' {
+			break
+		}
+		value := int(letter - '0')
+		if isFree {
+			for i := 0; i < value; i++ {
+				disk = append(disk, -1)
+			}
+			isFree = false
+		} else {
+			for i := 0; i < value; i++ {
+				disk = append(disk, ID)
+			}
+			isFree = true
+			ID++
+		}
+	}
+	posInv := len(disk) - 1
+	for pos := 0; pos < len(disk); pos++ {
+		if disk[pos] == -1 {
+			for disk[posInv] == -1 {
+				posInv--
+			}
+			if posInv <= pos {
+				break
+			}
+			disk[pos], disk[posInv] = disk[posInv], disk[pos]
+		}
+	}
+	for i, block := range disk {
+		if block == -1 {
+			break
+		}
+		result += i * block
+	}
+	fmt.Println(result)
 }
 
 func main() {
