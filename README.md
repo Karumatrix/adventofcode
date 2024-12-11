@@ -18,7 +18,7 @@ Welcome to my **Advent of Code** journey! 🎄 Below is my progress for the year
 | [Day 8](./2024/Day08)  | ✅       | Completed successfully! |
 | [Day 9](./2024/Day09)  | ✅       | Completed successfully! |
 | [Day 10](./2024/Day10) | ✅       | Completed successfully! |
-| [Day 11](./2024/Day11) | ❌       | Pending...              |
+| [Day 11](./2024/Day11) | ✅       | Completed successfully! |
 | [Day 12](./2024/Day12) | ❌       | Pending...              |
 | [Day 13](./2024/Day13) | ❌       | Pending...              |
 | [Day 14](./2024/Day14) | ❌       | Pending...              |
