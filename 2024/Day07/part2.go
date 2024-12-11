@@ -45,13 +45,13 @@ func checkOperations(values []int, resultWanted, currValue, index int) bool {
 	if index == len(values) {
 		return currValue == resultWanted
 	}
-	if checkOperation(values, resultWanted, currValue + values[index], index + 1) {
+	if checkOperations(values, resultWanted, currValue + values[index], index + 1) {
 		return true
 	}
-	if checkOperation(values, resultWanted, currValue * values[index], index + 1) {
+	if checkOperations(values, resultWanted, currValue * values[index], index + 1) {
 		return true
 	}
-	if checkOperation(values, resultWanted, concatNumbers(currValue, values[index]), index + 1) {
+	if checkOperations(values, resultWanted, concatNumbers(currValue, values[index]), index + 1) {
 		return true
 	}
 	return false
