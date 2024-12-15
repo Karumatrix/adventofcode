@@ -32,8 +32,36 @@ func filepathToStringArray(filepath string) []string {
 	return lines
 }
 
+func checkPairs(line string) bool {
+	for i := 0; i < len(line) - 3; i++ {
+		for j := i + 2; j < len(line) - 1; j++ {
+			if line[i] == line[j] && line[i + 1] == line[j + 1] {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func checkPalindrome(line string) bool {
+	for i := 0; i < len(line) - 2; i++ {
+		if line[i] == line[i + 2] {
+			return true
+		}
+	}
+	return false
+}
+
 func aoc(filepath string) {
-	fmt.Println("Hello world")
+	file := filepathToStringArray(filepath)
+	result := 0
+
+	for _, line := range file {
+		if checkPairs(line) && checkPalindrome(line) {
+			result++
+		}
+	}
+	fmt.Println(result)
 }
 
 func main() {

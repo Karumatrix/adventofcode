@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func filepathToString(filepath string) string {
@@ -33,7 +34,52 @@ func filepathToStringArray(filepath string) []string {
 }
 
 func aoc(filepath string) {
-	fmt.Println("Hello world")
+	file := filepathToStringArray(filepath)
+	width, length := 1000, 1000
+	lights := make([][]int, width)
+	for i := range lights {
+		lights[i] = make([]int, length)
+	}
+
+	for _, line := range file {
+		parts := strings.Split(line, " ")
+		if parts[0] == "toggle" {
+			coorX1, coorY1, coorX2, coorY2 := 0, 0, 0, 0
+			fmt.Sscanf(parts[1], "%d,%d", &coorX1, &coorY1)
+			fmt.Sscanf(parts[3], "%d,%d", &coorX2, &coorY2)
+			for i := coorX1; i <= coorX2; i++ {
+				for j := coorY1; j <= coorY2; j++ {
+					lights[i][j] += 2
+				}
+			}
+		}
+		if parts[0] == "turn" {
+			onOff := false
+			coorX1, coorY1, coorX2, coorY2 := 0, 0, 0, 0
+			fmt.Sscanf(parts[2], "%d,%d", &coorX1, &coorY1)
+			fmt.Sscanf(parts[4], "%d,%d", &coorX2, &coorY2)
+			if parts[1] == "on" {
+				onOff = true
+			}
+			for i := coorX1; i <= coorX2; i++ {
+				for j := coorY1; j <= coorY2; j++ {
+					if onOff {
+						lights[i][j]++
+					}
+					if !onOff && lights[i][j] > 0 {
+						lights[i][j]--
+					}
+				}
+			}
+		}
+	}
+	result := 0
+	for _, line := range lights {
+		for _, light := range line {
+			result += light
+		}
+	}
+	fmt.Println(result)
 }
 
 func main() {
