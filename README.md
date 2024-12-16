@@ -264,9 +264,9 @@ Welcome to my **Advent of Code** journey! 🎄 Below is my progress for the year
 
 |          Day           |  Status  |          Notes          |
 |------------------------|----------|-------------------------|
-| [Day 1](./2016/Day01)  | ❌       | Pending...              |
-| [Day 2](./2016/Day02)  | ❌       | Pending...              |
-| [Day 3](./2016/Day03)  | ❌       | Pending...              |
+| [Day 1](./2016/Day01)  | ✅       | Completed successfully! |
+| [Day 2](./2016/Day02)  | ✅       | Completed successfully! |
+| [Day 3](./2016/Day03)  | ✅       | Completed successfully! |
 | [Day 4](./2016/Day04)  | ❌       | Pending...              |
 | [Day 5](./2016/Day05)  | ❌       | Pending...              |
 | [Day 6](./2016/Day06)  | ❌       | Pending...              |

@@ -33,7 +33,36 @@ func filepathToStringArray(filepath string) []string {
 }
 
 func aoc(filepath string) {
-	fmt.Println("Hello world")
+	file := filepathToStringArray(filepath)
+	buttons := []string{
+		"..1..",
+		".234.",
+		"56789",
+		".ABC.",
+		"..D..",
+	}
+	x, y := 3, 0
+
+	for _, line := range file {
+		for _, dir := range line {
+			i, j := x, y
+			switch dir {
+			case 'R':
+				j++
+			case 'L':
+				j--
+			case 'U':
+				i--
+			case 'D':
+				i++
+			}
+			if i >= 0 && i < 5 && j >= 0 && j < 5 && buttons[i][j] != '.' {
+				x, y = i, j
+			}
+		}
+		fmt.Print(string(buttons[x][y]))
+	}
+	fmt.Println()
 }
 
 func main() {

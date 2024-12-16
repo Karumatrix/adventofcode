@@ -4,6 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
+	"strconv"
+	"strings"
 )
 
 func filepathToString(filepath string) string {
@@ -33,7 +36,23 @@ func filepathToStringArray(filepath string) []string {
 }
 
 func aoc(filepath string) {
-	fmt.Println("Hello world")
+	file := filepathToStringArray(filepath)
+	result := 0
+
+	for _, line := range file {
+		parts := strings.Fields(line)
+		value1, _ := strconv.Atoi(parts[0])
+		value2, _ := strconv.Atoi(parts[1])
+		value3, _ := strconv.Atoi(parts[2])
+		sides := []int{value1, value2, value3}
+		sort.Slice(sides, func(i, j int) bool {
+			return sides[i] < sides[j]
+		})
+		if sides[0] + sides[1] > sides[2] {
+			result++
+		}
+	}
+	fmt.Println(result)
 }
 
 func main() {
