@@ -42,12 +42,12 @@ func operandValue(operand, A, B, C int) int {
 	}
 }
 
-func run(a, b, c int, P []int) []int {
+func run(a, b, c int, Program []int) []int {
 	i := 0
 	var out []int
-	for i < len(P) {
-		op := P[i]
-		operand := P[i+1]
+	for i < len(Program) {
+		op := Program[i]
+		operand := Program[i+1]
 		switch op {
 		case 0:
 			a = int(a / int(math.Pow(2, float64(operandValue(operand, a, b, c)))))
@@ -76,13 +76,13 @@ func run(a, b, c int, P []int) []int {
 }
 
 func f(a, n int) interface{} {
-	if n > len(P) {
+	if n > len(Program) {
 		return a
 	}
 	for i := 0; i < 8; i++ {
 		_a := (a << 3) | i
-		out := run(_a, 0, 0, P)
-		if equal(out, P[len(P)-n:]) {
+		out := run(_a, 0, 0, Program)
+		if equal(out, Program[len(Program)-n:]) {
 			result := f(_a, n+1)
 			if result != nil {
 				return result
@@ -104,30 +104,19 @@ func equal(a, b []int) bool {
 	return true
 }
 
-var P []int
-var A, B, C int
+var Program []int
 
 func aoc(filepath string) {
 	file := filepathToStringArray(filepath)
-	fmt.Sscanf(file[0], "Register A: %d", &A)
-	fmt.Sscanf(file[1], "Register B: %d", &B)
-	fmt.Sscanf(file[2], "Register C: %d", &C)
 	parts := strings.Split(file[4], " ")
 	program := strings.Split(parts[1], ",")
 	for _, str := range program {
-		num, err := strconv.Atoi(str)
-		if err != nil {
-			panic(fmt.Sprintf("Error converting program number: %v", err))
-		}
-		P = append(P, num)
+		num, _ := strconv.Atoi(str)
+		Program = append(Program, num)
 	}
 
-	part2 := f(0, 1)
-	if part2 != nil {
-		fmt.Printf("part 2: %v\n", part2)
-	} else {
-		fmt.Println("part 2: No solution found")
-	}
+	result := f(0, 1)
+	fmt.Printf("part 2: %v\n", result)
 }
 
 func main() {
