@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func filepathToString(filepath string) string {
@@ -32,8 +33,32 @@ func filepathToStringArray(filepath string) []string {
 	return lines
 }
 
+func isPossible(design string, patterns []string, memo map[string]int) int {
+	if result, exists := memo[design]; exists {
+		return result
+	}
+	if design == "" {
+		return 1
+	}
+	total := 0
+	for _, pattern := range patterns {
+		if strings.HasPrefix(design, pattern) {
+			total += isPossible(design[len(pattern):], patterns, memo)
+		}
+	}
+	memo[design] = total
+	return total
+}
+
 func aoc(filepath string) {
-	fmt.Println("Hello world")
+	file := filepathToStringArray(filepath)
+	patterns := strings.Split(file[0], ", ")
+	memo := make(map[string]int)
+	result := 0
+	for i := 2; i < len(file); i++ {
+		result += isPossible(file[i], patterns, memo)
+	}
+	fmt.Println(result)
 }
 
 func main() {
