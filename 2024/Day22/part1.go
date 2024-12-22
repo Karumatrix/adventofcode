@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 )
 
 func filepathToString(filepath string) string {
@@ -32,8 +33,27 @@ func filepathToStringArray(filepath string) []string {
 	return lines
 }
 
+func getNextSecret(secret int) int {
+	tmp := secret * 64
+	result := (secret ^ tmp) % 16777216
+	tmp = result / 32
+	result = (result ^ tmp) % 16777216
+	tmp = result * 2048
+	return (result ^ tmp) % 16777216
+}
+
 func aoc(filepath string) {
-	fmt.Println("Hello world")
+	file := filepathToStringArray(filepath)
+	result := 0
+
+	for _, line := range file {
+		value, _ := strconv.Atoi(line)
+		for i := 0; i < 2000; i++ {
+			value = getNextSecret(value)
+		}
+		result += value
+	}
+	fmt.Println(result)
 }
 
 func main() {
