@@ -302,9 +302,9 @@ Welcome to my **Advent of Code** journey! 🎄 Below is my progress for the year
 | [Day 4](./2015/Day04)  | ✅       | Completed successfully! |
 | [Day 5](./2015/Day05)  | ✅       | Completed successfully! |
 | [Day 6](./2015/Day06)  | ✅       | Completed successfully! |
-| [Day 7](./2015/Day07)  | ❌       | Pending...              |
-| [Day 8](./2015/Day08)  | ❌       | Pending...              |
-| [Day 9](./2015/Day09)  | ❌       | Pending...              |
+| [Day 7](./2015/Day07)  | ✅       | Completed successfully! |
+| [Day 8](./2015/Day08)  | ✅       | Completed successfully! |
+| [Day 9](./2015/Day09)  | ✅       | Completed successfully! |
 | [Day 10](./2015/Day10) | ❌       | Pending...              |
 | [Day 11](./2015/Day11) | ❌       | Pending...              |
 | [Day 12](./2015/Day12) | ❌       | Pending...              |

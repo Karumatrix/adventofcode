@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 )
 
 func filepathToString(filepath string) string {
@@ -33,7 +34,15 @@ func filepathToStringArray(filepath string) []string {
 }
 
 func aoc(filepath string) {
-	fmt.Println("Hello world")
+	file := filepathToStringArray(filepath)
+	original, encoded := 0, 0
+
+	for _, line := range file {
+		original += len(line)
+		tmp := strconv.Quote(line)
+		encoded += len(tmp)
+	}
+	fmt.Println(encoded - original)
 }
 
 func main() {
